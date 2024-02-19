@@ -15,11 +15,9 @@ import com.tutorials.photon.ui.theme.network.School
 fun App_Nav(data: List<School>) {
 
     val navController = rememberNavController()
-    val context = LocalContext.current
     NavHost(navController = navController, startDestination = "Main") {
 
-
-        composable("Main") {
+        composable(route="Main") {
             MainSchoolData(schoolList = data, navController = navController)
         }
         composable(
@@ -31,7 +29,6 @@ fun App_Nav(data: List<School>) {
                 })
         ) {                navBackStackEntry ->
             val res = navController.previousBackStackEntry?.savedStateHandle?.get("res") as School?
-//            val res = navBackStackEntry.arguments?.getParcelable("res", School::class.java)
             DetailsScreen(schoolNames = res)
         }
 

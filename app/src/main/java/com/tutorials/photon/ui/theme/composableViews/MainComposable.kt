@@ -27,7 +27,7 @@ fun MainSchoolData(
 
                 Text(
                     modifier = Modifier.clickable {
-                        println("clicked " + schoolList[index].name)
+                        // pass the clicked School data to the Details composable
                         navController.currentBackStackEntry?.savedStateHandle?.set(
                             "res",
                             schoolList[index]
