@@ -25,6 +25,8 @@ fun MainSchoolData(
         items(count = schoolList.size) { index ->
             Row {
 
+                Text(text = schoolList[index].dbn)
+                Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     modifier = Modifier.clickable {
                         // pass the clicked School data to the Details composable
@@ -39,7 +41,7 @@ fun MainSchoolData(
                     color = colorResource(id = R.color.black),
                     style = MaterialTheme.typography.titleMedium,
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(12.dp))
             }
         }
     }

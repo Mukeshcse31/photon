@@ -24,7 +24,7 @@ fun App_Nav(data: List<School>) {
             route = "Details",
             arguments = listOf(
                 navArgument("res") {
-                    defaultValue = School("name","Overview", "opport1", "oppor2")
+                    defaultValue = School("dbn","name","Overview", "opport1", "oppor2")
                     type = NavType.ParcelableType(School::class.java)
                 })
         ) {                navBackStackEntry ->

@@ -9,6 +9,11 @@ import kotlinx.parcelize.Parcelize
 @Keep
 @Parcelize
 data class School(
+
+    @Expose
+    @SerializedName("dbn")
+    val dbn: String,
+
     @Expose
     @SerializedName("school_name")
     val name: String,
