@@ -4,14 +4,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import com.tutorials.photon.ui.theme.network.School
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tutorials.photon.R
@@ -23,10 +28,18 @@ fun MainSchoolData(
 ) {
     LazyColumn {
         items(count = schoolList.size) { index ->
-            Row {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-                Text(text = schoolList[index].dbn)
-                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    modifier = Modifier.padding(end = 8.dp),
+                    text = schoolList[index].dbn
+                )
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     modifier = Modifier.clickable {
                         // pass the clicked School data to the Details composable
@@ -41,7 +54,7 @@ fun MainSchoolData(
                     color = colorResource(id = R.color.black),
                     style = MaterialTheme.typography.titleMedium,
                 )
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.height(36.dp))
             }
         }
     }
@@ -51,33 +64,48 @@ fun MainSchoolData(
 fun DetailsScreen(
     schoolNames: School?
 ) {
-
-    schoolNames ?: return
+    val school = schoolNames ?: return
     Column {
-
         Text(
-            text = schoolNames.name,
+            text = school.name,
             color = colorResource(id = R.color.black),
             style = MaterialTheme.typography.headlineLarge,
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = schoolNames.overview,
+            text = school.overview,
             color = colorResource(id = R.color.black),
             style = MaterialTheme.typography.titleMedium,
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = schoolNames.academicopportunities1,
+            text = school.academicopportunities1,
             color = colorResource(id = R.color.black),
             style = MaterialTheme.typography.bodyLarge,
         )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = schoolNames.academicopportunities2,
-            color = colorResource(id = R.color.black),
-            style = MaterialTheme.typography.bodyMedium,
-        )
-
+        Spacer(modifier = Modifier.height(8.dp))
+        school.academicopportunities2?.let {
+            Text(
+                text = it,
+                color = colorResource(id = R.color.black),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     }
+
+    //TODO 1. Preview, 2.Espresso Test, 3. Unit tests
+}
+
+@Preview
+@Composable
+private fun ShowDetailsScreen() {
+    DetailsScreen(
+        School(
+            dbn = "dbn",
+            name = "School",
+            overview = "Overview",
+            academicopportunities1 = "academicopportunities1",
+            academicopportunities2 = "academicopportunities2"
+        )
+    )
 }

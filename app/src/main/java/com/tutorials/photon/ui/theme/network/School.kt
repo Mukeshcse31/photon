@@ -29,7 +29,7 @@ data class School(
 
     @Expose
     @SerializedName("academicopportunities2")
-    val academicopportunities2: String
+    val academicopportunities2: String?
 
 
 ) : Parcelable
